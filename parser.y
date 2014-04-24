@@ -654,11 +654,11 @@ var_ref		: ID
 
 dim_list	: dim_list MK_LB expr MK_RB 
                 {
-                    /*TODO*/
+                    $$ = makeSibling($1, $3);
                 }
             | MK_LB expr MK_RB
                 {
-                    /*TODO*/
+                    $$ = $2
                 }
 		;
 
