@@ -339,9 +339,7 @@ dim_decl	: MK_LB cexpr MK_RB
                 {
                     /*TODO*/
                 } 
-            /*TODO: Try if you can define a recursive production rule
-            | .......
-            */
+            | dim_decl MK_LB cexpr MK_RB 
             ;
 cexpr		: cexpr OP_PLUS mcexpr 
                 {
@@ -421,7 +419,7 @@ stmt		: MK_LBRACE block MK_RBRACE
                 {
                     /*TODO*/
                 }
-            /*TODO: | While Statement */
+            | WHILE MK_LPAREN relop_expr_list MK_RPAREN stmt
             | FOR MK_LPAREN assign_expr_list MK_SEMICOLON relop_expr_list MK_SEMICOLON assign_expr_list MK_RPAREN stmt
                 {
                     /*TODO*/
@@ -430,9 +428,12 @@ stmt		: MK_LBRACE block MK_RBRACE
                 {
                     /*TODO*/
                 }
-            /*TODO: | If Statement */
-            /*TODO: | If then else */
-            /*TODO: | function call */
+            | IF MK_LPAREN relop_expr_list MK_RPAREN stmt
+            | IF MK_LPAREN relop_expr_list MK_RPAREN stmt ELSE stmt
+            | ID MK_LPAREN relop_expr_list MK_RPAREN 
+                { /* function call */
+            
+                }
             | MK_SEMICOLON 
                 {
                     /*TODO*/
