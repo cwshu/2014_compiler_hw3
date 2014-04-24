@@ -35,6 +35,8 @@ IdentifierSemanticValue identifierSemanticValue;
         | NORMAL_ID, //function Name, uninitialized scalar variable
         | ARRAY_ID, //ID_NODE->child = dim
         | WITH_INIT_ID, //ID_NODE->child = initial value
+    - char *identifierName;
+    - struct SymbolTableEntry *symbolTableEntry;
 
 STMTSemanticValue stmtSemanticValue;
     - STMT_KIND
@@ -56,10 +58,23 @@ EXPRSemanticValue exprSemanticValue;
     - EXPR_KIND
         | BINARY_OPERATION,
         | UNARY_OPERATION
-    (iValue, fValue, binaryOp, unaryOp)
+    - union constEvalValue
+        - iValue
+        - fValue
+    - union op
+        - binaryOp
+        - unaryOp
 
 CON_Type *const1;
-    INTEGERC,FLOATC,STRINGC
+    - C_type
+        | INTEGERC
+        | FLOATC
+        | STRINGC
+	- union const_u
+		- int     intval;
+		- double  fval;
+		- char    *sc;
+		
 
 
 
