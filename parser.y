@@ -344,15 +344,15 @@ id_list		: ID
                 }
             | id_list MK_COMMA ID 
                 {
-                    /*TODO*/
+                    $$ = makeSibling($1, makeIDNode($3, NOiRMAL_ID));
                 }
             | id_list MK_COMMA ID dim_decl
                 {
-                    /*TODO*/
+                    $$ = makeSibling($1, makeChild(makeIDNode($3, ARRAY_ID), $4));
                 }
             | ID dim_decl
                 {
-                    /*TODO*/
+                    $$ = makeChild(makeIDNode($1, ARRAY_ID), $2);
                 }
 		;
 dim_decl	: MK_LB cexpr MK_RB 
@@ -404,11 +404,11 @@ cfactor:	CONST
 
 init_id_list	: init_id 
                     {
-                        /*TODO*/
+                        $$ = $1;
                     }
                 | init_id_list MK_COMMA init_id 
                     {
-                        /*TODO*/
+                        $$ = makeSibling($1, $3);
                     }
                 ;
 
@@ -418,11 +418,11 @@ init_id		: ID
                 }
             | ID dim_decl 
                 {
-                    /*TODO*/
+                    $$ = makeChild(makeIDNode($1, ARRAY_ID), $2);
                 }
             | ID OP_ASSIGN relop_expr 
                 {
-                    /*TODO*/
+                    $$ = makeChild(makeIDNode($1, NORMAL_ID), $3);
                 }
             ;
 
