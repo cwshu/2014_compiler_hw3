@@ -1,4 +1,7 @@
 *.swp
 *.swo
 *.o
-scanner
+parser
+parser.output
+parser.tab.h
+*.png
